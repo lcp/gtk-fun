@@ -82,9 +82,7 @@ draw_widget (GtkWidget *window,
 }
 
 static void
-screen_change_cb (GtkWidget *widget,
-		  GdkScreen *previous_screen,
-		  gpointer   user_data)
+set_visual (GtkWidget *widget)
 {
 	GdkScreen *screen;
 	GdkVisual *visual;
@@ -95,6 +93,14 @@ screen_change_cb (GtkWidget *widget,
 		visual = gdk_screen_get_system_visual (screen);
 
 	gtk_widget_set_visual (widget, visual);
+}
+
+static void
+screen_change_cb (GtkWidget *widget,
+		  GdkScreen *previous_screen,
+		  gpointer   user_data)
+{
+	set_visual (widget);
 }
 
 gboolean
@@ -125,20 +131,20 @@ main (int argc, char *argv[])
 
 	GtkCssProvider *css_provider;
 	GtkStyleContext *style_context;
+	GtkIconTheme *icon_theme;
 
 	GtkWidget *window;
 	GtkWidget *eventbox;
 	GtkWidget *close_icon;
-	GtkWidget *label1;
-	GtkWidget *label2;
+	GtkWidget *wifi_icon;
+	GtkWidget *bt_icon;
 	GtkWidget *rf_switch1;
 	GtkWidget *rf_switch2;
 	GtkWidget *grid;
 
-	GtkBorder padding;
+	GdkPixbuf *pixbuf;
 
-	GdkScreen *screen;
-	GdkVisual *visual;
+	GtkBorder padding;
 
 	char *text;
 
@@ -155,6 +161,9 @@ main (int argc, char *argv[])
 		return -1;
 	}
 
+	icon_theme = gtk_icon_theme_get_default ();
+	gtk_icon_theme_prepend_search_path (icon_theme, ".");
+
 	window = gtk_window_new (GTK_WINDOW_POPUP);
 	gtk_widget_set_app_paintable(window, TRUE);
 
@@ -163,12 +172,7 @@ main (int argc, char *argv[])
 					GTK_STYLE_PROVIDER (css_provider),
 					GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-	screen = gtk_widget_get_screen (window);
-	visual = gdk_screen_get_rgba_visual (screen);
-	if (visual == NULL)
-		visual = gdk_screen_get_system_visual (screen);
-
-	gtk_widget_set_visual (window, visual);
+	set_visual (window);
 
 	g_signal_connect (G_OBJECT (window), "draw", G_CALLBACK (draw_widget), NULL);
 	g_signal_connect (G_OBJECT (window), "screen_changed", G_CALLBACK (screen_change_cb), NULL);
@@ -176,22 +180,20 @@ main (int argc, char *argv[])
 	grid = gtk_grid_new ();
 	eventbox = gtk_event_box_new ();
 	gtk_event_box_set_visible_window (GTK_EVENT_BOX (eventbox), FALSE);
-	close_icon = gtk_image_new ();
-	gtk_image_set_from_file (GTK_IMAGE (close_icon), "close.svg");
+	close_icon = gtk_image_new_from_file ("close.svg");
 
-	label1 = gtk_label_new (NULL);
-	text = g_strdup_printf ("<b>Wireless</b>");
-	gtk_label_set_use_markup (GTK_LABEL (label1), TRUE);
-	gtk_label_set_label (GTK_LABEL (label1), text);
-	/* TODO check the text direction */
-	gtk_widget_set_halign (label1, GTK_ALIGN_START);
-
-	label2 = gtk_label_new (NULL);
-	text = g_strdup_printf ("<b>Bluetooth</b>");
-	gtk_label_set_use_markup (GTK_LABEL (label2), TRUE);
-	gtk_label_set_label (GTK_LABEL (label2), text);
-	/* TODO check the text direction */
-	gtk_widget_set_halign (label2, GTK_ALIGN_START);
+	pixbuf = gtk_icon_theme_load_icon (icon_theme,
+					   "wireless",
+					   128,
+					   0,
+					   NULL);
+	wifi_icon = gtk_image_new_from_pixbuf (pixbuf);
+	pixbuf = gtk_icon_theme_load_icon (icon_theme,
+					   "bluetooth",
+					   128,
+					   0,
+					   NULL);
+	bt_icon = gtk_image_new_from_pixbuf (pixbuf);
 
 	rf_switch1 = gtk_switch_new ();
 	rf_switch2 = gtk_switch_new ();
@@ -211,10 +213,10 @@ main (int argc, char *argv[])
 	gtk_grid_set_row_spacing ((GtkGrid *)grid, 10);
 	gtk_grid_set_column_spacing ((GtkGrid *)grid, 5);
 	gtk_grid_attach ((GtkGrid *)grid, eventbox, 11, 0, 1, 1);
-	gtk_grid_attach ((GtkGrid *)grid, label1, 0, 1, 6, 1);
-	gtk_grid_attach_next_to ((GtkGrid *)grid, rf_switch1, label1, GTK_POS_RIGHT, 6, 1);
-	gtk_grid_attach_next_to ((GtkGrid *)grid, label2, label1, GTK_POS_BOTTOM, 6, 1);
-	gtk_grid_attach_next_to ((GtkGrid *)grid, rf_switch2, rf_switch1, GTK_POS_BOTTOM, 6, 1);
+	gtk_grid_attach ((GtkGrid *)grid, wifi_icon, 0, 1, 6, 1);
+	gtk_grid_attach_next_to ((GtkGrid *)grid, bt_icon, wifi_icon, GTK_POS_RIGHT, 6, 1);
+	gtk_grid_attach_next_to ((GtkGrid *)grid, rf_switch1, wifi_icon, GTK_POS_BOTTOM, 6, 1);
+	gtk_grid_attach_next_to ((GtkGrid *)grid, rf_switch2, bt_icon, GTK_POS_BOTTOM, 6, 1);
 
 	gtk_container_add (GTK_CONTAINER (window), grid);
 
