@@ -1,6 +1,7 @@
 #include <gtk/gtk.h>
 
 #define BACKGROUN_ALPHA 0.75
+#define ICON_SAPCE 6
 
 void
 draw_rounded_rectangle (cairo_t *cr,
@@ -138,8 +139,10 @@ main (int argc, char *argv[])
 	GtkWidget *close_icon;
 	GtkWidget *wifi_icon;
 	GtkWidget *bt_icon;
+	GtkWidget *wwan_icon;
 	GtkWidget *rf_switch1;
 	GtkWidget *rf_switch2;
+	GtkWidget *rf_switch3;
 	GtkWidget *grid;
 
 	GdkPixbuf *pixbuf;
@@ -194,9 +197,16 @@ main (int argc, char *argv[])
 					   0,
 					   NULL);
 	bt_icon = gtk_image_new_from_pixbuf (pixbuf);
+	pixbuf = gtk_icon_theme_load_icon (icon_theme,
+					   "wwan-icon",
+					   128,
+					   0,
+					   NULL);
+	wwan_icon = gtk_image_new_from_pixbuf (pixbuf);
 
 	rf_switch1 = gtk_switch_new ();
 	rf_switch2 = gtk_switch_new ();
+	rf_switch3 = gtk_switch_new ();
 
 	gtk_container_add (GTK_CONTAINER (eventbox), close_icon);
 	gtk_widget_add_events (eventbox, GDK_BUTTON_PRESS_MASK);
@@ -212,11 +222,13 @@ main (int argc, char *argv[])
 
 	gtk_grid_set_row_spacing ((GtkGrid *)grid, 10);
 	gtk_grid_set_column_spacing ((GtkGrid *)grid, 5);
-	gtk_grid_attach ((GtkGrid *)grid, eventbox, 11, 0, 1, 1);
-	gtk_grid_attach ((GtkGrid *)grid, wifi_icon, 0, 1, 6, 1);
-	gtk_grid_attach_next_to ((GtkGrid *)grid, bt_icon, wifi_icon, GTK_POS_RIGHT, 6, 1);
-	gtk_grid_attach_next_to ((GtkGrid *)grid, rf_switch1, wifi_icon, GTK_POS_BOTTOM, 6, 1);
-	gtk_grid_attach_next_to ((GtkGrid *)grid, rf_switch2, bt_icon, GTK_POS_BOTTOM, 6, 1);
+	gtk_grid_attach ((GtkGrid *)grid, eventbox, ICON_SAPCE*3-1, 0, 1, 1);
+	gtk_grid_attach ((GtkGrid *)grid, wifi_icon, 0, 1, ICON_SAPCE, 1);
+	gtk_grid_attach_next_to ((GtkGrid *)grid, bt_icon, wifi_icon, GTK_POS_RIGHT, ICON_SAPCE, 1);
+	gtk_grid_attach_next_to ((GtkGrid *)grid, wwan_icon, bt_icon, GTK_POS_RIGHT, ICON_SAPCE, 1);
+	gtk_grid_attach_next_to ((GtkGrid *)grid, rf_switch1, wifi_icon, GTK_POS_BOTTOM, ICON_SAPCE, 1);
+	gtk_grid_attach_next_to ((GtkGrid *)grid, rf_switch2, bt_icon, GTK_POS_BOTTOM, ICON_SAPCE, 1);
+	gtk_grid_attach_next_to ((GtkGrid *)grid, rf_switch3, wwan_icon, GTK_POS_BOTTOM, ICON_SAPCE, 1);
 
 	gtk_container_add (GTK_CONTAINER (window), grid);
 
