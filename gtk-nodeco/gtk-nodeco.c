@@ -2,6 +2,7 @@
 
 #define BACKGROUN_ALPHA 0.75
 #define ICON_SAPCE 6
+#define ICON_SIZE 96
 
 void
 draw_rounded_rectangle (cairo_t *cr,
@@ -104,6 +105,59 @@ screen_change_cb (GtkWidget *widget,
 	set_visual (widget);
 }
 
+static void
+load_pixbuf (GtkImage   *icon,
+	     const char *icon_name)
+{
+	GtkIconTheme *icon_theme;
+	GdkPixbuf *pixbuf;
+
+	icon_theme = gtk_icon_theme_new ();
+	gtk_icon_theme_prepend_search_path (icon_theme, ".");
+
+	pixbuf = gtk_icon_theme_load_icon (icon_theme,
+					   icon_name,
+					   ICON_SIZE,
+					   0,
+					   NULL);
+	gtk_image_set_from_pixbuf (icon, pixbuf);
+	g_object_unref (icon_theme);
+}
+
+static void
+wlan_switch_activate_cb (GtkSwitch *wlan_switch,
+			 gboolean   active,
+			 GtkImage  *wlan_icon)
+{
+	if (gtk_switch_get_active (wlan_switch))
+		load_pixbuf (wlan_icon, "wlan-unblocked");
+	else
+		load_pixbuf (wlan_icon, "wlan-blocked");
+}
+
+static void
+bt_switch_activate_cb (GtkSwitch *bt_switch,
+		       gboolean   active,
+		       GtkImage  *bt_icon)
+{
+	if (gtk_switch_get_active (bt_switch))
+		load_pixbuf (bt_icon, "bt-unblocked");
+	else
+		load_pixbuf (bt_icon, "bt-blocked");
+}
+
+static void
+wwan_switch_activate_cb (GtkSwitch *wwan_switch,
+			 gboolean   active,
+			 GtkImage  *wwan_icon)
+{
+	if (gtk_switch_get_active (wwan_switch))
+		load_pixbuf (wwan_icon, "wwan-unblocked");
+	else
+		load_pixbuf (wwan_icon, "wwan-blocked");
+}
+
+
 gboolean
 on_event_cb (GtkWidget *widget,
 	     GdkEvent  *event,
@@ -132,7 +186,6 @@ main (int argc, char *argv[])
 
 	GtkCssProvider *css_provider;
 	GtkStyleContext *style_context;
-	GtkIconTheme *icon_theme;
 
 	GtkWidget *window;
 	GtkWidget *eventbox;
@@ -144,8 +197,6 @@ main (int argc, char *argv[])
 	GtkWidget *rf_switch2;
 	GtkWidget *rf_switch3;
 	GtkWidget *grid;
-
-	GdkPixbuf *pixbuf;
 
 	GtkBorder padding;
 
@@ -163,9 +214,6 @@ main (int argc, char *argv[])
 		g_warning ("Failed to load css");
 		return -1;
 	}
-
-	icon_theme = gtk_icon_theme_get_default ();
-	gtk_icon_theme_prepend_search_path (icon_theme, ".");
 
 	window = gtk_window_new (GTK_WINDOW_POPUP);
 	gtk_widget_set_app_paintable(window, TRUE);
@@ -185,28 +233,22 @@ main (int argc, char *argv[])
 	gtk_event_box_set_visible_window (GTK_EVENT_BOX (eventbox), FALSE);
 	close_icon = gtk_image_new_from_file ("close.svg");
 
-	pixbuf = gtk_icon_theme_load_icon (icon_theme,
-					   "wlan-icon",
-					   128,
-					   0,
-					   NULL);
-	wifi_icon = gtk_image_new_from_pixbuf (pixbuf);
-	pixbuf = gtk_icon_theme_load_icon (icon_theme,
-					   "bt-icon",
-					   128,
-					   0,
-					   NULL);
-	bt_icon = gtk_image_new_from_pixbuf (pixbuf);
-	pixbuf = gtk_icon_theme_load_icon (icon_theme,
-					   "wwan-icon",
-					   128,
-					   0,
-					   NULL);
-	wwan_icon = gtk_image_new_from_pixbuf (pixbuf);
-
+	wifi_icon = gtk_image_new ();
 	rf_switch1 = gtk_switch_new ();
+	g_signal_connect (G_OBJECT (rf_switch1), "notify::active",
+			  G_CALLBACK (wlan_switch_activate_cb), wifi_icon);
+	bt_icon = gtk_image_new ();
 	rf_switch2 = gtk_switch_new ();
+	g_signal_connect (G_OBJECT (rf_switch2), "notify::active",
+			  G_CALLBACK (bt_switch_activate_cb), bt_icon);
+	wwan_icon = gtk_image_new ();
 	rf_switch3 = gtk_switch_new ();
+	g_signal_connect (G_OBJECT (rf_switch3), "notify::active",
+			  G_CALLBACK (wwan_switch_activate_cb), wwan_icon);
+
+	gtk_switch_set_active (GTK_SWITCH (rf_switch1), TRUE);
+	gtk_switch_set_active (GTK_SWITCH (rf_switch2), TRUE);
+	gtk_switch_set_active (GTK_SWITCH (rf_switch3), TRUE);
 
 	gtk_container_add (GTK_CONTAINER (eventbox), close_icon);
 	gtk_widget_add_events (eventbox, GDK_BUTTON_PRESS_MASK);
