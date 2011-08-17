@@ -1,6 +1,6 @@
 #include <gtk/gtk.h>
 
-#define BACKGROUN_ALPHA 0.75
+#define BACKGROUND_ALPHA 0.75
 #define ICON_SAPCE 6
 #define ICON_SIZE 96
 
@@ -76,7 +76,7 @@ draw_widget (GtkWidget *window,
 
 	draw_rounded_rectangle (cr, 1.0, 0.0, 0.0, height/10, width-1, height-1);
 	gtk_style_context_get_background_color (context, GTK_STATE_NORMAL, &acolor);
-	acolor.alpha = BACKGROUN_ALPHA;
+	acolor.alpha = BACKGROUND_ALPHA;
 	gdk_cairo_set_source_rgba (cr, &acolor);
 	cairo_fill(cr);
 
