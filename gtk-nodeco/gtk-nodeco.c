@@ -183,13 +183,13 @@ main (int argc, char *argv[])
 	close_icon = gtk_image_new_from_file ("close.svg");
 
 	pixbuf = gtk_icon_theme_load_icon (icon_theme,
-					   "wireless",
+					   "wlan-icon",
 					   128,
 					   0,
 					   NULL);
 	wifi_icon = gtk_image_new_from_pixbuf (pixbuf);
 	pixbuf = gtk_icon_theme_load_icon (icon_theme,
-					   "bluetooth",
+					   "bt-icon",
 					   128,
 					   0,
 					   NULL);
