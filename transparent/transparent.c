@@ -14,17 +14,24 @@ draw_transparent_back_cb (GtkWidget *widget,
 	int		 width;
 	int		 height;
 
-	context = gtk_widget_get_style_context (widget);
-
-	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 	gtk_window_get_size (GTK_WINDOW (widget), &width, &height);
 
-	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 0.0);
-	cairo_paint (cr);
+	if (BACKGROUND_ALPHA == 0) {
+		/* Set OPERATOR to CLEAR for a complete transparency */
+		cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
+	} else {
+		context = gtk_widget_get_style_context (widget);
 
-	gtk_style_context_get_background_color (context, GTK_STATE_NORMAL, &acolor);
-	acolor.alpha = BACKGROUND_ALPHA;
-	gdk_cairo_set_source_rgba (cr, &acolor);
+		cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+
+		cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 0.0);
+		cairo_paint (cr);
+
+		gtk_style_context_get_background_color (context, GTK_STATE_NORMAL, &acolor);
+		acolor.alpha = BACKGROUND_ALPHA;
+		gdk_cairo_set_source_rgba (cr, &acolor);
+	}
+
 	cairo_rectangle (cr, 0, 0, width, height);
 	cairo_fill(cr);
 
