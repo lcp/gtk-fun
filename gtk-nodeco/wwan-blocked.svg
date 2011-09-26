@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="128"
@@ -14,9 +15,106 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="wwan-blocked.svg">
+   sodipodi:docname="wwan.svg">
   <defs
-     id="defs4" />
+     id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4295"
+       id="linearGradient4301"
+       x1="24.04163"
+       y1="48.306797"
+       x2="24.04163"
+       y2="-58.024525"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4295">
+      <stop
+         style="stop-color:#d40000;stop-opacity:1;"
+         offset="0"
+         id="stop4297" />
+      <stop
+         style="stop-color:#d40000;stop-opacity:0;"
+         offset="1"
+         id="stop4299" />
+    </linearGradient>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter4303"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur4305"
+         in="SourceAlpha"
+         stdDeviation="0"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix4307"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4309"
+         in="bluralpha"
+         dx="0"
+         dy="0"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge4311"
+         result="fbSourceGraphic">
+        <feMergeNode
+           id="feMergeNode4313"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode4315"
+           in="SourceGraphic" />
+      </feMerge>
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix4392" />
+      <feGaussianBlur
+         id="feGaussianBlur4394"
+         in="fbSourceGraphicAlpha"
+         stdDeviation="1"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix4396"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4398"
+         in="bluralpha"
+         dx="1"
+         dy="1"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge4400">
+        <feMergeNode
+           id="feMergeNode4402"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode4404"
+           in="fbSourceGraphic" />
+      </feMerge>
+    </filter>
+    <linearGradient
+       gradientTransform="translate(75,999.36219)"
+       y2="-58.024525"
+       x2="24.04163"
+       y1="48.306797"
+       x1="24.04163"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3451"
+       xlink:href="#linearGradient4295"
+       inkscape:collect="always" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,7 +123,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.33"
-     inkscape:cx="106.73246"
+     inkscape:cx="92.006118"
      inkscape:cy="71.968087"
      inkscape:document-units="px"
      inkscape:current-layer="g3788"
@@ -47,7 +145,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -67,9 +165,9 @@
          id="path3003" />
       <path
          inkscape:connector-curvature="0"
-         style="fill:#c83737;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         d="m 86.25,1004.3622 -6.25,6.25 17.750004,17.75 -17.750004,17.75 6.25,6.25 17.75,-17.75 17.75,17.75 6.25,-6.25 -17.75,-17.75 17.75,-17.75 -6.25,-6.25 -17.75,17.75 -17.75,-17.75 z"
-         id="rect4319" />
+         style="fill:url(#linearGradient3451);fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter4303)"
+         d="m 81.5625,999.36219 c -3.627827,0 -6.5625,2.93471 -6.5625,6.56251 l 0,34.875 c 0,3.6278 2.934673,6.5625 6.5625,6.5625 l 34.875,0 c 3.62783,0 6.5625,-2.9347 6.5625,-6.5625 l 0,-34.875 c 0,-3.6278 -2.93467,-6.56251 -6.5625,-6.56251 l -34.875,0 z m 1.15625,2.00001 L 99,1017.6434 115.28125,1001.3622 121,1007.0809 104.71875,1023.3622 121,1039.6435 115.28125,1045.3622 99,1029.0809 82.71875,1045.3622 77,1039.6435 93.28125,1023.3622 77,1007.0809 l 5.71875,-5.7187 z"
+         id="rect3010" />
     </g>
   </g>
 </svg>
