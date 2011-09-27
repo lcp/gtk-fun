@@ -15,7 +15,7 @@
    id="svg2985"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="wlan.svg">
+   sodipodi:docname="wlan-blocked.svg">
   <defs
      id="defs2987">
     <linearGradient
@@ -142,7 +142,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -160,6 +160,7 @@
        inkscape:connector-curvature="0"
        style="fill:url(#linearGradient3270);fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter4303)"
        d="M 81.5625,-4 C 77.934673,-4 75,-1.065327 75,2.5625 l 0,34.875 C 75,41.065327 77.934673,44 81.5625,44 l 34.875,0 C 120.06533,44 123,41.065327 123,37.4375 l 0,-34.875 C 123,-1.065327 120.06533,-4 116.4375,-4 l -34.875,0 z M 82.71875,-2 99,14.28125 115.28125,-2 121,3.71875 104.71875,20 121,36.28125 115.28125,42 99,25.71875 82.71875,42 77,36.28125 93.28125,20 77,3.71875 82.71875,-2 z"
-       id="rect3010" />
+       id="rect3010"
+       transform="matrix(0.88888889,0,0,0.88888889,8.8148148,6.4074073)" />
   </g>
 </svg>

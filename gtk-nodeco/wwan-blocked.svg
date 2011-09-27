@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="wwan.svg">
+   sodipodi:docname="wwan-blocked.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -145,7 +145,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -167,7 +167,8 @@
          inkscape:connector-curvature="0"
          style="fill:url(#linearGradient3451);fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter4303)"
          d="m 81.5625,999.36219 c -3.627827,0 -6.5625,2.93471 -6.5625,6.56251 l 0,34.875 c 0,3.6278 2.934673,6.5625 6.5625,6.5625 l 34.875,0 c 3.62783,0 6.5625,-2.9347 6.5625,-6.5625 l 0,-34.875 c 0,-3.6278 -2.93467,-6.56251 -6.5625,-6.56251 l -34.875,0 z m 1.15625,2.00001 L 99,1017.6434 115.28125,1001.3622 121,1007.0809 104.71875,1023.3622 121,1039.6435 115.28125,1045.3622 99,1029.0809 82.71875,1045.3622 77,1039.6435 93.28125,1023.3622 77,1007.0809 l 5.71875,-5.7187 z"
-         id="rect3010" />
+         id="rect3010"
+         transform="matrix(0.88888889,0,0,0.8888887,8.8148148,118.89228)" />
     </g>
   </g>
 </svg>

@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="bluetooth.svg">
+   sodipodi:docname="bt-blocked.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -141,7 +141,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -159,6 +159,7 @@
        inkscape:connector-curvature="0"
        style="fill:url(#linearGradient3091);fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter4303)"
        d="m 81.562501,999.36218 c -3.627827,0 -6.5625,2.93472 -6.5625,6.56252 l 0,34.875 c 0,3.6278 2.934673,6.5625 6.5625,6.5625 l 34.875009,0 c 3.62782,0 6.5625,-2.9347 6.5625,-6.5625 l 0,-34.875 c 0,-3.6278 -2.93468,-6.56252 -6.5625,-6.56252 l -34.875009,0 z m 1.15625,2.00002 16.281253,16.2812 16.281256,-16.2812 5.71875,5.7187 -16.28125,16.2813 16.28125,16.2812 -5.71875,5.7188 -16.281256,-16.2813 -16.281253,16.2813 -5.71875,-5.7188 16.281253,-16.2812 -16.281253,-16.2813 5.71875,-5.7187 z"
-       id="rect3010" />
+       id="rect3010"
+       transform="matrix(0.88888872,0,0,0.88888852,8.8148248,118.89247)" />
   </g>
 </svg>
